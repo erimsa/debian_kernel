@@ -180,6 +180,5 @@ obj-$(CONFIG_RK_NAND)		+= rk_nand/
 obj-$(CONFIG_RK_HEADSET)	+= headset_observe/
 
 obj-y				+= miniarm/
-obj-y				+= board-info/
 obj-$(CONFIG_RK_FLASH)		+= rkflash/
 obj-y                           += rk_nand/

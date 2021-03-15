@@ -71,6 +71,12 @@ config DEBUG_GPIO
 	  slower.  The diagnostics help catch the type of setup errors
 	  that are most common when setting up new platforms or boards.
 
+config GPIO_VOLUME
+	tristate "Rotary gpio volume control app"
+	default m
+	help
+		Erimsa rotary volume control module
+
 config GPIO_SYSFS
 	bool "/sys/class/gpio/... (sysfs interface)"
 	depends on SYSFS
@@ -94,6 +100,7 @@ config GPIO_GENERIC
 # This symbol is selected by both I2C and SPI expanders
 config GPIO_MAX730X
 	tristate
+
 
 menu "Memory mapped GPIO drivers"
 

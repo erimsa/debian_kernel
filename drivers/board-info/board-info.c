@@ -172,6 +172,7 @@ static void read_pcb_id(void)
 		pcb = "unknown pcb";
 }
 
+
 static int board_info_proc_read(struct seq_file *buf, void *v)
 {
 	/* Board info display */
@@ -183,7 +184,8 @@ static int board_info_proc_read(struct seq_file *buf, void *v)
 
 static int project_id_proc_open(struct inode *inode, struct  file *file)
 {
-	return single_open(file, board_info_proc_read, NULL);
+	return single_open(file, NULL, NULL);
+
 }
 
 

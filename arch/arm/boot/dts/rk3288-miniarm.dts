@@ -137,10 +137,60 @@
 			gpio-key,wakeup = <1>;
 			debounce-interval = <100>;
 		};
+
+		key-enter {
+			gpios = <&gpio5 19 GPIO_ACTIVE_LOW>;
+			linux,code = <28>;
+			label = "ENTER KEY";
+			linux,input-type = <1>;
+			debounce-interval = <100>;
+		};
+
+		key-up {
+			gpios = <&gpio8 9 GPIO_ACTIVE_LOW>;
+			linux,code = <103>;
+			label = "UP KEY";
+			linux,input-type = <1>;
+			debounce-interval = <100>;
+		};
+
+		key-down {
+			gpios = <&gpio8 8 GPIO_ACTIVE_LOW>;
+			linux,code = <108>;
+			label = "DOWN KEY";
+			linux,input-type = <1>;
+			debounce-interval = <100>;
+		};
+
+		key-left {
+			gpios = <&gpio8 6 GPIO_ACTIVE_LOW>;
+			linux,code = <105>;
+			label = "LEFT KEY";
+			linux,input-type = <1>;
+			debounce-interval = <100>;
+		};
+
+		key-right {
+			gpios = <&gpio8 7 GPIO_ACTIVE_LOW>;
+			linux,code = <106>;
+			label = "RIGHT KEY";
+			linux,input-type = <1>;
+			debounce-interval = <100>;
+		};
+	};
+
+	rotary@0 {
+		compatible = "rotary-encoder";
+		pinctrl-names = "default";
+		pinctrl-0 = <&rotary_gpio>;
+		gpios = <&gpio8 RK_PA4 GPIO_ACTIVE_LOW>,
+			<&gpio8 RK_PA5 GPIO_ACTIVE_LOW>;
+		linux,axis = <0>; /* REL_X */
+		rotary-encoder,relative-axis;
 	};
 
 	gpio-leds {
-		compatible = "gpio-leds";
+		compatible = "gpio-leds"; 
 
 		pwr-led {
 			gpios = <&gpio0 3 GPIO_ACTIVE_HIGH>;
@@ -157,6 +207,8 @@
 			linux,default-trigger="default-off";
 		};
 	};
+
+	
 
 	sound-simple-card {
 		compatible = "simple-audio-card";
@@ -503,7 +555,7 @@
 };
 
 &i2c1 {
-	status = "okay";
+	status = "disabled";
 	rtc: ds1307@68 {
 		compatible = "dallas,ds1307";
 		reg = <0x68>;
@@ -636,7 +688,7 @@
 };
 
 &spi2 {
-	status = "okay";
+	status = "disabled";
 	max-freq = <50000000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&spi2_clk &spi2_tx &spi2_rx &spi2_cs0 &spi2_cs1>;
@@ -818,9 +870,24 @@
 		};
 	};
 
+	rotary {
+		rotary_gpio: rotary-gpio {
+			rockchip,pins =
+				<8 RK_PA4 RK_FUNC_GPIO &pcfg_pull_up>,
+				<8 RK_PA5 RK_FUNC_GPIO &pcfg_pull_up>;
+		};
+	};
+
 	buttons {
 		pwrbtn: pwrbtn {
 			rockchip,pins = <0 5 RK_FUNC_GPIO &pcfg_pull_up>;
+		};
+
+		key_inputs: key_inputs {
+			rockchip,pins = <8 9 RK_FUNC_GPIO &pcfg_pull_up>,
+							<8 8 RK_FUNC_GPIO &pcfg_pull_up>,
+							<8 6 RK_FUNC_GPIO &pcfg_pull_up>,
+							<8 7 RK_FUNC_GPIO &pcfg_pull_up>;
 		};
 	};
 
