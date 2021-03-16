@@ -140,7 +140,7 @@
 
 		key-enter {
 			gpios = <&gpio5 19 GPIO_ACTIVE_LOW>;
-			linux,code = <28>;
+			linux,code = <164>; // KEY_PLAYPAUSE
 			label = "ENTER KEY";
 			linux,input-type = <1>;
 			debounce-interval = <100>;
